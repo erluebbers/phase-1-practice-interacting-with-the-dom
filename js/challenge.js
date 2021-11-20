@@ -1,6 +1,9 @@
 
 const counter = document.querySelector('#counter')
-let countClicks = 
+let countClicks = function () {
+    let i = 0
+    
+}
 
 window.addEventListener('load', () => {countUp = setInterval(() => {counter.innerText++}, 1000)})
 
