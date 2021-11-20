@@ -1,9 +1,5 @@
 
 const counter = document.querySelector('#counter')
-let countClicks = function () {
-    let i = 0
-    
-}
 
 window.addEventListener('load', () => {countUp = setInterval(() => {counter.innerText++}, 1000)})
 
@@ -12,10 +8,18 @@ document.querySelector('#minus').addEventListener('click', () => {counter.innerT
 document.querySelector('#plus').addEventListener('click', () => {counter.innerText++})
 
 document.querySelector('#heart').addEventListener('click', () => {
-    const likeList = document.querySelector('.likes')
-    let li = document.createElement('li')
-    li.innerText = countClicks === 1 ? `${counter.innerText} has been liked 1 time` : `${counter.innerText} has been liked ${countClicks} times`
-    likeList.appendChild(li)
+    if (document.getElementById(counter.innerText)) {
+        let likeLi = document.getElementById(counter.innerText)
+        likeLi.innerText = `${counter.innerText} has been liked ${++likeLi.dataset.likecount} times`
+    }
+    else {
+        const likeList = document.querySelector('.likes')
+        let li = document.createElement('li')
+        li.id = counter.innerText
+        li.dataset.likecount = 1
+        li.innerText = `${counter.innerText} has been liked 1 time`
+        likeList.appendChild(li)
+    }
 })
 
 document.querySelector('#pause').addEventListener('click', pauseTimer)
@@ -30,14 +34,10 @@ document.querySelector('#comment-form').addEventListener('submit', (e) => {
 
 function pauseTimer () {
     clearInterval(countUp)
-    document.querySelector('#pause').innerText = 'resume'
+    document.querySelector('#pause').innerHTML = 'resume'
     document.querySelector('#minus').disabled = true
     document.querySelector('#plus').disabled = true
     document.querySelector('#heart').disabled = true
-}
-
-function resumeTimer () {
-
 }
 
 
